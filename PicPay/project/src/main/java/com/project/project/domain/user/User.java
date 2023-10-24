@@ -1,5 +1,6 @@
 package com.project.project.domain.user;
 
+import com.project.project.DTOs.UserDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,12 +21,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-  private Long Id;
+  private Long id;
   private String firstName;
   private String lastName;
   @Column(unique = true)
@@ -37,4 +36,13 @@ public class User {
   @Enumerated(EnumType.STRING)
   private UserType userType;
 
+  public User(UserDTO data) {
+    this.firstName = data.firstName();
+    this.lastName = data.lastName();
+    this.document = data.document();
+    this.email = data.email();
+    this.balance = data.balance();
+    this.password = data.password();
+    this.userType = data.userType();
+  }
 }
